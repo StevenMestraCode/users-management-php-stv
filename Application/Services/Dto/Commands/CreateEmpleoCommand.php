@@ -1,0 +1,11 @@
+<?php
+declare(strict_types=1);
+
+final class CreateEmpleoCommand {
+    public function __construct(
+        public readonly string $nombre, public readonly string $categoria, 
+        public readonly string $areaTrabajo, public readonly string $empresa, 
+        public readonly string $nivel, public readonly float $sueldo, 
+        public readonly string $funciones, public readonly string $cargoJefe
+    ) {}
+}
