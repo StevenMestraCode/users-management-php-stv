@@ -85,23 +85,24 @@ try {
         case 'home':
             View::render('home', buildHomeViewData());
             break;
-                    case 'listar':
+                            case 'listar_empleo':
             $controller = DependencyInjection::getEmpleoController();
             $controller->listar();
             break;
 
-        case 'crear':
+        case 'crear_empleo':
             $controller = DependencyInjection::getEmpleoController();
             $controller->crear();
             break;
 
-        case 'create':
-            View::render('users/create', buildCreateUserViewData());
-            break;
-
-        case 'store':
+        case 'store_empleo':
             $controller = DependencyInjection::getEmpleoController();
             $controller->store();
+            break;
+
+        case 'eliminar_empleo':
+            $controller = DependencyInjection::getEmpleoController();
+            $controller->eliminar();
             break;
 
         case 'store':

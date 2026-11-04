@@ -24,8 +24,11 @@
                 <td><?= htmlspecialchars($emp->nivel()) ?></td>
                 <td>$<?= number_format($emp->sueldo()->value(), 2) ?></td>
                 <td>
-                   
-                    <span>Ver</span>
+                    <!-- Botón de Eliminar -->
+                    <form method="POST" action="index.php?route=empleos.eliminar" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar este empleo?');">
+                        <input type="hidden" name="id" value="<?= $emp->id()->value() ?>">
+                        <button type="submit" style="color: white; background-color: red; padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer;">Eliminar</button>
+                    </form>
                 </td>
             </tr>
             <?php endforeach; ?>

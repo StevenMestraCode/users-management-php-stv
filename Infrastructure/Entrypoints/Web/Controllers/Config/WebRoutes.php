@@ -62,17 +62,22 @@ final class WebRoutes
                 'method' => 'POST',
                 'action' => 'forgot.send',
             ),
-                        'empleos.listar' => array(
+            'empleos.listar' => array(
                 'method' => 'GET',
-                'action' => 'listar',
+                'action' => 'listar_empleo',
             ),
             'empleos.crear' => array(
                 'method' => 'GET',
-                'action' => 'crear',
+                'action' => 'crear_empleo',
             ),
-                        'empleos.listar' => array('method' => 'GET', 'action' => 'listar'),
-            'empleos.crear' => array('method' => 'GET', 'action' => 'crear'),
-            'empleos.store' => array('method' => 'POST', 'action' => 'store'), 
+            'empleos.store' => array(
+                'method' => 'POST',
+                'action' => 'store_empleo',
+            ),
+            'empleos.eliminar' => array(
+                'method' => 'POST',
+                'action' => 'eliminar_empleo',
+            ),
         );
     }
 }

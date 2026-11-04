@@ -56,4 +56,16 @@ class EmpleoController
             exit;
         }
     }
+
+    public function eliminar(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+            $command = new DeleteEmpleoCommand($_POST['id']);
+            
+            $this->deleteUseCase->execute($command);
+            
+            header('Location: index.php?route=empleos.listar');
+            exit;
+        }
+    }
 }
