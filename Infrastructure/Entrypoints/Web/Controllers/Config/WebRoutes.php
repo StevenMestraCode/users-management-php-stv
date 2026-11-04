@@ -78,6 +78,14 @@ final class WebRoutes
                 'method' => 'POST',
                 'action' => 'eliminar_empleo',
             ),
+            'empleos.editar' => array(
+                'method' => 'GET',
+                'action' => 'editar_empleo',
+            ),
+            'empleos.actualizar' => array(
+                'method' => 'POST',
+                'action' => 'actualizar_empleo',
+            ),
         );
     }
 }

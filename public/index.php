@@ -105,6 +105,16 @@ try {
             $controller->eliminar();
             break;
 
+        case 'editar_empleo':
+            $controller = DependencyInjection::getEmpleoController();
+            $controller->editar();
+            break;
+
+        case 'actualizar_empleo':
+            $controller = DependencyInjection::getEmpleoController();
+            $controller->actualizar();
+            break;
+
         case 'store':
             $controller = DependencyInjection::getUserController();
             $form = getCreateUserFormData();

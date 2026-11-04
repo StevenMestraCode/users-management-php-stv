@@ -68,4 +68,47 @@ class EmpleoController
             exit;
         }
     }
+        public function editar(): void
+    {
+        
+        $id = $_GET['id'] ?? null;
+        
+        if ($id) {
+            
+            $query = new GetEmpleoByIdQuery($id);
+            $empleo = $this->getByIdUseCase->execute($query);
+            
+            
+            require_once __DIR__ . '/../Presentation/Views/empleos/editar.php';
+        } else {
+            
+            header('Location: index.php?route=empleos.listar');
+            exit;
+        }
+    }
+
+    public function actualizar(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            $command = new UpdateEmpleoCommand(
+                $_POST['id'], 
+                $_POST['nombre'], 
+                $_POST['categoria'], 
+                $_POST['area_trabajo'], 
+                $_POST['empresa'], 
+                $_POST['nivel'], 
+                (float)$_POST['sueldo'], 
+                $_POST['funciones'], 
+                $_POST['cargo_jefe']
+            );
+            
+           
+            $this->updateUseCase->execute($command);
+            
+            
+            header('Location: index.php?route=empleos.listar');
+            exit;
+        }
+    }
 }
