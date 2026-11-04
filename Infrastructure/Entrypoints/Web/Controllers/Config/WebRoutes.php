@@ -70,6 +70,9 @@ final class WebRoutes
                 'method' => 'GET',
                 'action' => 'crear',
             ),
+                        'empleos.listar' => array('method' => 'GET', 'action' => 'listar'),
+            'empleos.crear' => array('method' => 'GET', 'action' => 'crear'),
+            'empleos.store' => array('method' => 'POST', 'action' => 'store'), 
         );
     }
 }

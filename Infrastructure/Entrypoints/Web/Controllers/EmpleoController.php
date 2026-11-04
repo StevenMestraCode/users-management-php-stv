@@ -33,11 +33,21 @@ class EmpleoController
 
     public function crear(): void
     {
+        require_once __DIR__ . '/../Presentation/Views/empleos/crear.php';
+    }
+
+    public function store(): void
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $command = new CreateEmpleoCommand(
-                $_POST['nombre'], $_POST['categoria'], $_POST['area_trabajo'], 
-                $_POST['empresa'], $_POST['nivel'], (float)$_POST['sueldo'], 
-                $_POST['funciones'], $_POST['cargo_jefe']
+                $_POST['nombre'], 
+                $_POST['categoria'], 
+                $_POST['area_trabajo'], 
+                $_POST['empresa'], 
+                $_POST['nivel'], 
+                (float)$_POST['sueldo'], 
+                $_POST['funciones'], 
+                $_POST['cargo_jefe']
             );
             
             $this->createUseCase->execute($command);
@@ -45,7 +55,5 @@ class EmpleoController
             header('Location: index.php?route=empleos.listar');
             exit;
         }
-        
-        require_once __DIR__ . '/../Presentation/Views/empleos/crear.php';
     }
 }

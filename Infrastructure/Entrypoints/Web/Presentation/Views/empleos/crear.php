@@ -1,6 +1,6 @@
 <h1>Registrar Nuevo Empleo</h1>
 <br>
-<form method="POST" action="index.php?route=empleos.crear">
+<form method="POST" action="index.php?route=empleos.store">
     <div>
         <label for="nombre">Nombre del Cargo:</label><br>
         <input type="text" id="nombre" name="nombre" required>

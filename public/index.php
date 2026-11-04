@@ -100,6 +100,11 @@ try {
             break;
 
         case 'store':
+            $controller = DependencyInjection::getEmpleoController();
+            $controller->store();
+            break;
+
+        case 'store':
             $controller = DependencyInjection::getUserController();
             $form = getCreateUserFormData();
             $form['id'] = generateUuid4();
