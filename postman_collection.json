@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "CRUD Empleos - Steven Mestra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Login Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "admin@crud.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/users-management-php-stv-main/public/index.php?route=auth.authenticate",
+					"protocol": "http",
+					"host": ["localhost"],
+					"path": ["users-management-php-stv-main", "public", "index.php"],
+					"query": [
+						{
+							"key": "route",
+							"value": "auth.authenticate"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "2. Listar Empleos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/users-management-php-stv-main/public/index.php?route=empleos.listar",
+					"protocol": "http",
+					"host": ["localhost"],
+					"path": ["users-management-php-stv-main", "public", "index.php"],
+					"query": [
+						{
+							"key": "route",
+							"value": "empleos.listar"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "3. Crear Empleo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{ "key": "nombre", "value": "Desarrollador Postman", "type": "text" },
+						{ "key": "categoria", "value": "Tecnologia", "type": "text" },
+						{ "key": "area_trabajo", "value": "Backend", "type": "text" },
+						{ "key": "empresa", "value": "Postman Corp", "type": "text" },
+						{ "key": "nivel", "value": "Senior", "type": "text" },
+						{ "key": "sueldo", "value": "5000", "type": "text" },
+						{ "key": "funciones", "value": "Probar APIs", "type": "text" },
+						{ "key": "cargo_jefe", "value": "CTO", "type": "text" }
+					]
+				},
+				"url": {
+					"raw": "http://localhost/users-management-php-stv-main/public/index.php?route=empleos.store",
+					"protocol": "http",
+					"host": ["localhost"],
+					"path": ["users-management-php-stv-main", "public", "index.php"],
+					"query": [
+						{
+							"key": "route",
+							"value": "empleos.store"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "4. Actualizar Empleo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{ "key": "id", "value": "4", "type": "text" },
+						{ "key": "nombre", "value": "Desarrollador Postman EDITADO", "type": "text" },
+						{ "key": "categoria", "value": "Tecnologia", "type": "text" },
+						{ "key": "area_trabajo", "value": "Backend", "type": "text" },
+						{ "key": "empresa", "value": "Postman Corp", "type": "text" },
+						{ "key": "nivel", "value": "Senior", "type": "text" },
+						{ "key": "sueldo", "value": "7500", "type": "text" },
+						{ "key": "funciones", "value": "Probar APIs y actualizar", "type": "text" },
+						{ "key": "cargo_jefe", "value": "CTO", "type": "text" }
+					]
+				},
+				"url": {
+					"raw": "http://localhost/users-management-php-stv-main/public/index.php?route=empleos.actualizar",
+					"protocol": "http",
+					"host": ["localhost"],
+					"path": ["users-management-php-stv-main", "public", "index.php"],
+					"query": [
+						{
+							"key": "route",
+							"value": "empleos.actualizar"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "5. Eliminar Empleo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{ "key": "id", "value": "4", "type": "text" }
+					]
+				},
+				"url": {
+					"raw": "http://localhost/users-management-php-stv-main/public/index.php?route=empleos.eliminar",
+					"protocol": "http",
+					"host": ["localhost"],
+					"path": ["users-management-php-stv-main", "public", "index.php"],
+					"query": [
+						{
+							"key": "route",
+							"value": "empleos.eliminar"
+						}
+					]
+				}
+			}
+		}
+	]
+}
