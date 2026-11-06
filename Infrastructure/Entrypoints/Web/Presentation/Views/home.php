@@ -38,7 +38,7 @@
         </div>
 
         <div class="section">
-            <h2>Gestión de Empleos (Ejercicio 15)</h2>
+           <h2>Gestión de Empleos</h2>
             <ul>
                 <li><a href="index.php?route=empleos.crear">C: Registrar empleo</a></li>
                 <li><a href="index.php?route=empleos.listar">L: Listar empleos</a></li>
