@@ -39,22 +39,33 @@ class EmpleoController
     public function store(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $command = new CreateEmpleoCommand(
-                $_POST['trabajador'], 
-                $_POST['nombre'], 
-                $_POST['categoria'], 
-                $_POST['area_trabajo'], 
-                $_POST['empresa'], 
-                $_POST['nivel'], 
-                (float)$_POST['sueldo'], 
-                $_POST['funciones'], 
-                $_POST['cargo_jefe']
-            );
-            
-            $this->createUseCase->execute($command);
-            
-            header('Location: index.php?route=empleos.listar');
-            exit;
+            try {
+                $command = new CreateEmpleoCommand(
+                    $_POST['trabajador'], 
+                    $_POST['nombre'], 
+                    $_POST['categoria'], 
+                    $_POST['area_trabajo'], 
+                    $_POST['empresa'], 
+                    $_POST['nivel'], 
+                    (float)$_POST['sueldo'], 
+                    $_POST['funciones'], 
+                    $_POST['cargo_jefe']
+                );
+                
+                $this->createUseCase->execute($command);
+                
+                header('Location: index.php?route=empleos.listar');
+                exit;
+            } catch (\Throwable $e) {
+                // --- MODO DIAGNÓSTICO ---
+                echo "<div style='background: #f8d7da; color: #721c24; padding: 20px; border: 1px solid #f5c6cb; margin: 20px; font-family: monospace;'>";
+                echo "<h2>⚠️ Error detectado al guardar el empleo:</h2>";
+                echo "<p><strong>Mensaje:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
+                echo "<p><strong>Archivo:</strong> " . htmlspecialchars($e->getFile()) . "</p>";
+                echo "<p><strong>Línea:</strong> " . $e->getLine() . "</p>";
+                echo "</div>";
+                die();
+            }
         }
     }
 
