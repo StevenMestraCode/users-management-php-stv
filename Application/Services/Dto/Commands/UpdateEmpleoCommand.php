@@ -4,6 +4,7 @@ declare(strict_types=1);
 final class UpdateEmpleoCommand
 {
     private string $id;
+    private string $trabajador;
     private string $nombre;
     private string $categoria;
     private string $areaTrabajo;
@@ -14,10 +15,11 @@ final class UpdateEmpleoCommand
     private string $cargoJefe;
 
     public function __construct(
-        string $id, string $nombre, string $categoria, string $areaTrabajo, string $empresa, 
+        string $id, string $trabajador, string $nombre, string $categoria, string $areaTrabajo, string $empresa, 
         string $nivel, float $sueldo, string $funciones, string $cargoJefe
     ) {
         $this->id = trim($id);
+        $this->trabajador = trim($trabajador);
         $this->nombre = trim($nombre);
         $this->categoria = trim($categoria);
         $this->areaTrabajo = trim($areaTrabajo);
@@ -29,6 +31,7 @@ final class UpdateEmpleoCommand
     }
 
     public function id(): string { return $this->id; }
+    public function trabajador(): string { return $this->trabajador; }
     public function nombre(): string { return $this->nombre; }
     public function categoria(): string { return $this->categoria; }
     public function areaTrabajo(): string { return $this->areaTrabajo; }

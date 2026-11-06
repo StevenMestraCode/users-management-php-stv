@@ -14,14 +14,10 @@ final class EmpleoApplicationMapper
     {
         return new EmpleoModel(
             $generatedId ? new EmpleoId($generatedId) : null,
+            $command->trabajador(),
             new EmpleoNombre($command->nombre()),
-            $command->categoria(),
-            $command->areaTrabajo(),
-            $command->empresa(),
-            $command->nivel(),
-            new EmpleoSueldo($command->sueldo()),
-            $command->funciones(),
-            $command->cargoJefe()
+            $command->categoria(), $command->areaTrabajo(), $command->empresa(), $command->nivel(),
+            new EmpleoSueldo($command->sueldo()), $command->funciones(), $command->cargoJefe()
         );
     }
 
@@ -29,14 +25,26 @@ final class EmpleoApplicationMapper
     {
         return new EmpleoModel(
             new EmpleoId($command->id()),
+            $command->trabajador(),
             new EmpleoNombre($command->nombre()),
-            $command->categoria(),
-            $command->areaTrabajo(),
-            $command->empresa(),
-            $command->nivel(),
-            new EmpleoSueldo($command->sueldo()),
-            $command->funciones(),
-            $command->cargoJefe()
+            $command->categoria(), $command->areaTrabajo(), $command->empresa(), $command->nivel(),
+            new EmpleoSueldo($command->sueldo()), $command->funciones(), $command->cargoJefe()
         );
+    }
+
+    public static function fromModelToArray(EmpleoModel $empleo): array
+    {
+        return [
+            'id' => $empleo->id() ? $empleo->id()->value() : null,
+            'trabajador' => $empleo->trabajador(),
+            'nombre' => $empleo->nombre()->value(),
+            'categoria' => $empleo->categoria(),
+            'areaTrabajo' => $empleo->areaTrabajo(),
+            'empresa' => $empleo->empresa(),
+            'nivel' => $empleo->nivel(),
+            'sueldo' => $empleo->sueldo()->value(),
+            'funciones' => $empleo->funciones(),
+            'cargoJefe' => $empleo->cargoJefe()
+        ];
     }
 }

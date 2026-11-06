@@ -40,6 +40,7 @@ class EmpleoController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $command = new CreateEmpleoCommand(
+                $_POST['trabajador'], 
                 $_POST['nombre'], 
                 $_POST['categoria'], 
                 $_POST['area_trabajo'], 
@@ -57,31 +58,16 @@ class EmpleoController
         }
     }
 
-    public function eliminar(): void
+    public function editar(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
-            $command = new DeleteEmpleoCommand($_POST['id']);
-            
-            $this->deleteUseCase->execute($command);
-            
-            header('Location: index.php?route=empleos.listar');
-            exit;
-        }
-    }
-        public function editar(): void
-    {
-        
         $id = $_GET['id'] ?? null;
         
         if ($id) {
-            
             $query = new GetEmpleoByIdQuery($id);
             $empleo = $this->getByIdUseCase->execute($query);
             
-            
             require_once __DIR__ . '/../Presentation/Views/empleos/editar.php';
         } else {
-            
             header('Location: index.php?route=empleos.listar');
             exit;
         }
@@ -90,9 +76,9 @@ class EmpleoController
     public function actualizar(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
             $command = new UpdateEmpleoCommand(
-                $_POST['id'], 
+                $_POST['id'],
+                $_POST['trabajador'], 
                 $_POST['nombre'], 
                 $_POST['categoria'], 
                 $_POST['area_trabajo'], 
@@ -103,9 +89,19 @@ class EmpleoController
                 $_POST['cargo_jefe']
             );
             
-           
             $this->updateUseCase->execute($command);
             
+            header('Location: index.php?route=empleos.listar');
+            exit;
+        }
+    }
+
+    public function eliminar(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+            $command = new DeleteEmpleoCommand($_POST['id']);
+            
+            $this->deleteUseCase->execute($command);
             
             header('Location: index.php?route=empleos.listar');
             exit;
