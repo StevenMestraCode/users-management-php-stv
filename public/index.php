@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-
-
 (function (): void{
     $requestPath = rtrim(
         (string) parse_url((string) ($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH),
@@ -31,8 +29,6 @@ require_once __DIR__ . '/../Infrastructure/Entrypoints/Web/Presentation/Flash.ph
 DependencyInjection::boot();
 Flash::start();
 
-
-
 function isLoggedIn(): bool
 {
     return isset($_SESSION['auth']['id']);
@@ -51,11 +47,8 @@ function getLoggedUser(): array
     return is_array($_SESSION['auth'] ?? null) ? $_SESSION['auth'] : array();
 }
 
-
-
 $route = isset($_GET['route']) ? trim((string) $_GET['route']) : 'home';
 $routes = WebRoutes::routes();
-
 
 if (!isset($routes[$route])) {
     http_response_code(404);
@@ -72,7 +65,6 @@ if ($httpMethod !== $definition['method']) {
     exit;
 }
 
-
 $publicActions = array('home', 'login', 'authenticate', 'logout', 'forgot', 'forgot.send', 'create', 'store');
 if (!in_array($definition['action'], $publicActions, true) && !isLoggedIn()) {
     Flash::setMessage('Debes iniciar sesión para acceder a esta sección.');
@@ -85,7 +77,14 @@ try {
         case 'home':
             View::render('home', buildHomeViewData());
             break;
-                            case 'listar_empleo':
+
+        // --- INICIO: RESTAURADO PARA USUARIOS ---
+        case 'create':
+            View::render('users/create', buildCreateUserViewData());
+            break;
+        // --- FIN: RESTAURADO PARA USUARIOS ---
+
+        case 'listar_empleo':
             $controller = DependencyInjection::getEmpleoController();
             $controller->listar();
             break;
@@ -252,7 +251,6 @@ try {
             header('Location: ?route=auth.login');
             exit;
 
-
         case 'forgot':
             View::render('auth/forgot-password', array(
                 'pageTitle' => 'Recuperar contraseña',
@@ -275,9 +273,7 @@ try {
             $repository = DependencyInjection::getUserRepository();
             $foundUser = $repository->getByEmail(new UserEmail($forgotEmail));
 
-            
             if ($foundUser !== null && $foundUser->status() === UserStatusEnum::ACTIVE) {
-               
                 $tempPassword = bin2hex(random_bytes(5));
                 $newPassword = UserPassword::fromPlainText($tempPassword);
                 $updatedUser = $foundUser->changePassword($newPassword);
@@ -342,7 +338,6 @@ try {
     }
 }
 
-
 function sendPasswordRecoveryEmail(string $email, string $name, string $tempPassword): void
 {
     $templateFile = __DIR__ . '/../Infrastructure/Entrypoints/Web/Presentation/Views/emails/forgot-password.php';
@@ -363,7 +358,6 @@ function sendPasswordRecoveryEmail(string $email, string $name, string $tempPass
 
     DependencyInjection::getEmailSenderService()->send($destination);
 }
-
 
 /**
  * @param UserResponse[] $users
@@ -422,7 +416,6 @@ function buildEditUserViewData(UserResponse $user): array
     );
 }
 
-
 function generateUuid4(): string
 {
     $data = random_bytes(16);
@@ -431,7 +424,6 @@ function generateUuid4(): string
 
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
-
 
 /**
  * @return array<string, string>
@@ -460,7 +452,6 @@ function getUpdateUserFormData(): array
         'status' => isset($_POST['status']) ? trim((string) $_POST['status']) : '',
     );
 }
-
 
 /**
  * @param array<string, string> $form
