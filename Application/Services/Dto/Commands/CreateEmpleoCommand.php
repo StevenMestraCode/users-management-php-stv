@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 final class CreateEmpleoCommand
 {
+    private string $trabajador;
     private string $nombre;
     private string $categoria;
     private string $areaTrabajo;
@@ -13,9 +14,17 @@ final class CreateEmpleoCommand
     private string $cargoJefe;
 
     public function __construct(
-        string $nombre, string $categoria, string $areaTrabajo, string $empresa, 
-        string $nivel, float $sueldo, string $funciones, string $cargoJefe
+        string $trabajador, 
+        string $nombre, 
+        string $categoria, 
+        string $areaTrabajo, 
+        string $empresa, 
+        string $nivel, 
+        float $sueldo, 
+        string $funciones, 
+        string $cargoJefe
     ) {
+        $this->trabajador = trim($trabajador);
         $this->nombre = trim($nombre);
         $this->categoria = trim($categoria);
         $this->areaTrabajo = trim($areaTrabajo);
@@ -26,6 +35,7 @@ final class CreateEmpleoCommand
         $this->cargoJefe = trim($cargoJefe);
     }
 
+    public function trabajador(): string { return $this->trabajador; }
     public function nombre(): string { return $this->nombre; }
     public function categoria(): string { return $this->categoria; }
     public function areaTrabajo(): string { return $this->areaTrabajo; }
